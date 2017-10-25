@@ -12,9 +12,9 @@ $conn = mysqli_connect($hostname, $username, $password, $db);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-//should do some safeguards against injection eventually
-$username = $_POST["username"]; 
-$password = $_POST["password"];
+
+$username = mysqli_real_escape_string($conn, $_POST['username']);
+$password = mysqli_real_escape_string($conn, $_POST['password']);
 
 $query = "SELECT `username` AND `password` FROM `users` WHERE `username` = '$username' and password = '$password'";
 
