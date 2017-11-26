@@ -1,3 +1,3 @@
 # cmpe272webapp
 
-<a href="spartanshop272.org">SpartanShop272.org</a>
+<a href="http://spartanshop272.org/">http://spartanshop272.org/</a>
