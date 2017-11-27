@@ -23,8 +23,9 @@ class AnObject
         $this->description = $description;
     }
 
-    public function getImage($url)
+    public function echoImage($url, $height=100, $width=100)
     {
+        echo "<img src=$url height=$height width=$width>";
 
     }
 
