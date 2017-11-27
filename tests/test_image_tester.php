@@ -6,8 +6,9 @@
  * Time: 5:00 PM
  */
 
-include '../src/util.php';
+include "../src/models/AnObject.php";
 
-echo httpFetchPost("http://huyvanvo94.com");
+$object = new AnObject("Hello", "hello");
 
+$object->echoImage("http://huyvanvo94.com/img/cs.jpg", 100, 100);
 ?>
