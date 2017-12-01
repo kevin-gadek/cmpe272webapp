@@ -90,8 +90,15 @@
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
               <small class="text-muted">Posted by Anonymous on 3/1/17</small>
               <hr>
-              <a href="#" class="btn btn-success">Leave a Review</a>
-            </div>
+              <div class="form">
+                    <form class="review-form" id="review-form">
+                    <input type="text" placeholder="review rating"/>
+                    <button>submit</button>
+                  </form>
+                  <br>
+                  <textarea rows="4" cols="50" name="comment" form="usrform" placeholder="Please enter your review here...">
+                </textarea>
+                </div> <!-- end form -->
           </div>
           <!-- /.card -->
 
@@ -110,7 +117,6 @@
       </div>
       <!-- /.container -->
     </footer>
-
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
