@@ -11,15 +11,27 @@ class User
 {
 
     protected $id;
+
     protected $firstName;
     protected $lastName;
-    protected $emailAddress;
+    protected $email;
+    protected $password;
+    protected $homeNumber;
+    protected $mobileNumber;
 
-    function __construct($firstName, $lastName, $emailAddress)
+    function __construct($firstName, $lastName, $email, $password, $homeNumber, $mobileNumber)
     {
         $this->lastName = $lastName;
         $this->firstName = $firstName;
-        $this->emailAddress = $emailAddress;
+        $this->email = $email;
+        $this->password = $password;
+        $this->homeNumber = $homeNumber;
+        $this->mobileNumber = $mobileNumber;
+
+    }
+
+    public function getId($pdo){
+
     }
 
     /**
@@ -70,27 +82,40 @@ class User
         $this->emailAddress = $emailAddress;
     }
 
+    function insertToDB($pdo)
+    {
 
-    function insertToDB($pdo){
-        if($pdo == null){
-            throw new \PDOException("Error");
+        try {
+            $sql = "INSERT INTO Users(firstName, lastName, email, password, home_number, mobile_number) 
+                    VALUES (:firstName, :lastName, :email, :password, :home_number, :mobile_number)";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':firstName', $this->firstName);
+            $stmt->bindValue(':lastName', $this->lastName);
+            $stmt->bindValue(':email', $this->email);
+            $stmt->bindValue(':password', $this->password);
+            $stmt->bindValue(':home_number', $this->homeNumber);
+            $stmt->bindValue(':mobile_number', $this->mobileNumber);
+            $stmt->execute();
+            return;
+        }catch (PDOException $e) {
+
+            return false;
         }
-
-        $sql = "INSERT INTO Users(firstName, lastName, emailAddress) VALUES (:firstName, :lastName, :emailAddress)";
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':firstName', $this->firstName);
-        $stmt->bindValue(':lastName', $this->lastName);
-        $stmt->bindValue(':emailAddress', $this->emailAddress);
-        $stmt->execute();
 
     }
 
-    function login($pdo){
+    function login(){
 
 
 
         return false;
+    }
+
+    function signOut(){
+
+        return false;
+
     }
 
 }
