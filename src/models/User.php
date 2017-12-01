@@ -77,9 +77,9 @@ class User
     /**
      * @param mixed $emailAddress
      */
-    public function setEmailAddress($emailAddress)
+    public function setEmailAddress($email)
     {
-        $this->emailAddress = $emailAddress;
+        $this->email = $email;
     }
 
     function insertToDB($pdo)
