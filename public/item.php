@@ -15,7 +15,9 @@
 
     <!-- Custom styles for this template -->
     <link href="css/shop-item.css" rel="stylesheet">
-
+	
+	<!-- ionic icons -->
+	<link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   </head>
 
   <body>
@@ -29,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.php">Home</a>
+              <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="tracker.php">Tracking</a>
@@ -90,8 +92,22 @@
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
               <small class="text-muted">Posted by Anonymous on 3/1/17</small>
               <hr>
-              <a href="#" class="btn btn-success">Leave a Review</a>
-            </div>
+              <div class="form">
+					<textarea rows="4" cols="50" name="comment" form="usrform" placeholder="Please enter your review here...">
+					</textarea>	
+					<br>
+					<form class="review-form" id="review-form">
+                    <div class="x-star-rating">
+						<div class="star full"></div>
+						<div class="star full"></div>
+						<div class="star full"></div>
+						<div class="star"></div>
+						<div class="star"></div>
+					</div>
+                    <button>submit</button>
+                  </form>                 
+                  
+                </div> <!-- end form -->
           </div>
           <!-- /.card -->
 
@@ -110,7 +126,6 @@
       </div>
       <!-- /.container -->
     </footer>
-
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

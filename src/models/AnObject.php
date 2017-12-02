@@ -14,13 +14,16 @@ class AnObject
 {
     // id from database that is created
     protected $id;
+
     protected $title;
     protected $description;
+    protected $image_url;
 
-    public function __construct($title, $description)
+    public function __construct($title, $description, $image_url)
     {
         $this->title = $title;
         $this->description = $description;
+        $this->image_url = $image_url;
     }
 
     public function echoImage($url, $height=100, $width=100)
