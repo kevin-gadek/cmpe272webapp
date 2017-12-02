@@ -24,7 +24,7 @@ body {
 .top-five-by-company {
     margin-top: 25px;
     text-align: center;
-    margin-bottom:50px;
+    margin-bottom:25px;
 }
 
 .top-five-by-company li {
@@ -50,4 +50,10 @@ body {
 
 .best-reviewed-by-company li {
     list-style-position:inside;
+}
+
+.line{
+     border-top:1px solid black;
+     width:100%;
+     margin-bottom: 25px;
 }
