@@ -15,7 +15,9 @@
 
     <!-- Custom styles for this template -->
     <link href="css/shop-item.css" rel="stylesheet">
-
+	
+	<!-- ionic icons -->
+	<link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   </head>
 
   <body>
@@ -29,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.php">Home</a>
+              <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="tracker.php">Tracking</a>
@@ -91,13 +93,20 @@
               <small class="text-muted">Posted by Anonymous on 3/1/17</small>
               <hr>
               <div class="form">
-                    <form class="review-form" id="review-form">
-                    <input type="text" placeholder="review rating"/>
+					<textarea rows="4" cols="50" name="comment" form="usrform" placeholder="Please enter your review here...">
+					</textarea>	
+					<br>
+					<form class="review-form" id="review-form">
+                    <div class="x-star-rating">
+						<div class="star full"></div>
+						<div class="star full"></div>
+						<div class="star full"></div>
+						<div class="star"></div>
+						<div class="star"></div>
+					</div>
                     <button>submit</button>
-                  </form>
-                  <br>
-                  <textarea rows="4" cols="50" name="comment" form="usrform" placeholder="Please enter your review here...">
-                </textarea>
+                  </form>                 
+                  
                 </div> <!-- end form -->
           </div>
           <!-- /.card -->
