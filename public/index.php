@@ -34,13 +34,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="tracker.php">Tracking</a>
+              <a class="nav-link" href="/tracker.php">Tracking</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="register.php">Register</a>
+              <a class="nav-link" href="/register.php">Register</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link" href="login.php">Log In</a>
+              <a class="nav-link" href="/login">Log In</a>
             </li>
           </ul>
         </div>
@@ -55,12 +55,13 @@
         <div class="col-lg-3">
 
           <h1 class="my-4">Spartan Shop</h1>
+		  <h3>Filter By: </h3>
           <div class="list-group">
-            <a href="#" class="list-group-item">Company 1</a>
-            <a href="#" class="list-group-item">Company 2</a>
-            <a href="#" class="list-group-item">Company 3</a>
-			<a href="#" class="list-group-item">Company 4</a>
-			<a href="#" class="list-group-item">Company 5</a>
+            <a href="#" class="list-group-item">Tutoring</a> <!-- Huy company id 1-->
+            <a href="#" class="list-group-item">Gemstones</a>  <!-- andrew company id 2-->
+            <a href="#" class="list-group-item">Interior Design</a> <!-- kevin company id 3-->
+			<a href="#" class="list-group-item">Chinese Food Restaurant</a>  <!-- xuan company id 4-->
+			<a href="#" class="list-group-item">Construction</a>  <!-- mangesh company id 5-->
           </div>
 
         </div>
