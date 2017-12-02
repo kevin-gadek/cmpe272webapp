@@ -9,4 +9,8 @@
 final class WebsiteConstants
 {
 
+    static $huy_company_id = 1;
+
+
+
 }

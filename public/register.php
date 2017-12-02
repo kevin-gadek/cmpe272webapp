@@ -29,7 +29,11 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
+<<<<<<< HEAD
               <a class="nav-link" href="index.html">Home</a>
+=======
+              <a class="nav-link" href="index.php">Home</a>
+>>>>>>> a02b6e8ccf316e0c0961d80ec84c9a5d1acef8b4
             </li>
             <li class="nav-item">
               <a class="nav-link" href="tracker.php">Tracking</a>
@@ -76,4 +80,8 @@
 
   </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> a02b6e8ccf316e0c0961d80ec84c9a5d1acef8b4
