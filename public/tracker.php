@@ -65,7 +65,7 @@
     
     <div class="top-five-by-company">
         <div class="company">
-            <h3>Tutoring</h3>
+            <h4>Tutoring</h4>
             <ul>
             <li>Product 1</li>
             <li>Product 2</li>
@@ -73,7 +73,7 @@
             </ul>
         </div>    
         <div class="company" >
-            <h3>Gemstones</h3>
+            <h4>Gemstones</h4>
             <ul>
             <li>Product 1</li>
             <li>Product 2</li>
@@ -81,7 +81,7 @@
             </ul>
         </div> 
          <div class="company" >
-            <h3>Interior Design</h3>
+            <h4>Interior Design</h4>
             <ul>
             <li>Product 1</li>
             <li>Product 2</li>
@@ -89,7 +89,7 @@
             </ul>
         </div>   
         <div class="company">
-            <h3>Chinese Resturant</h3>
+            <h4>Chinese Resturant</h4>
             <ul>
             <li>Product 1</li>
             <li>Product 2</li>
@@ -97,7 +97,7 @@
             </ul>
         </div>   
         <div class="company">
-            <h3>Construction</h3>
+            <h4>Construction</h4>
             <ul>
             <li>Product 1</li>
             <li>Product 2</li>
@@ -116,13 +116,56 @@
          <li>Product 3</li>
         </ul>
     </div> <!-- best-reviewed -->
+    
+        <div class="best-reviewed-by-company">
+        <div class="company">
+            <h4>Tutoring</h4>
+            <ul>
+            <li>Product 1</li>
+            <li>Product 2</li>
+            <li>Product 3</li>    
+            </ul>
+        </div>    
+        <div class="company" >
+            <h3>Gemstones</h3>
+            <ul>
+            <li>Product 1</li>
+            <li>Product 2</li>
+            <li>Product 3</li>    
+            </ul>
+        </div> 
+         <div class="company" >
+            <h4>Interior Design</h4>
+            <ul>
+            <li>Product 1</li>
+            <li>Product 2</li>
+            <li>Product 3</li>    
+            </ul>
+        </div>   
+        <div class="company">
+            <h4>Chinese Resturant</h4>
+            <ul>
+            <li>Product 1</li>
+            <li>Product 2</li>
+            <li>Product 3</li>    
+            </ul>
+        </div>   
+        <div class="company">
+            <h4>Construction</h4>
+            <ul>
+            <li>Product 1</li>
+            <li>Product 2</li>
+            <li>Product 3</li>    
+            </ul>
+        </div>   
+    </div> <!-- best-reviewed-company -->
       
 
     </div>
     <!-- /.container -->
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark" style="position:absolute; bottom:0; width:100%">
+    <footer class="py-5 bg-dark" style="position:absolute; bottom:0; width:100%; height:10%">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Spartan Shop 2017</p>
       </div>
