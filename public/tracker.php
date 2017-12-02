@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+<?php
+/**
+ * Created by PhpStorm.
+ * User: huyvo
+ * Date: 11/26/17
+ * Time: 5:00 PM
+ */
+
+/*
+include "../src/models/AnObject.php";
+
+$object = new AnObject("Hello", "hello");
+
+$object->echoImage("http://huyvanvo94.com/img/cs.jpg", 100, 100);*/
+
+include '../src/models/Tracking.php';
+include '../src/Database.php';
+include '../settings.php';
+
+
+$db = new Database($settings);
+$pdo = $db->getPDO();
+
+$results = Tracking::fetchTopFiveMostVisited($pdo);
+
+?>
 
   <head>
 
@@ -57,9 +82,11 @@
         <br>
         <!-- top five list here -->
         <ul>
-        <li>Product 1</li>
-         <li>Product 2</li>
-         <li>Product 3</li>
+            <?php
+            foreach ($results as $result){
+            echo "<li>" . $result['product_id']."  ".$result['instance']."</li>";
+            }
+            ?>
         </ul>
     </div>
     

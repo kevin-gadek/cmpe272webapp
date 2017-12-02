@@ -6,49 +6,42 @@
  * Time: 4:11 PM
  */
 
-namespace Database;
 
 class Database
 {
+
     private $pdo;
-
-
-    function __construct($host=null, $name=null, $port=null, $charset=null, $username=null, $password=null, $settings=null)
+    // The constructor
+    // Database dependency from settings.php
+    function __construct($settings)
     {
-        if($settings == null) {
-            $this->pdo = new \PDO(sprintf(
-                'mysql:host=%s;dbname=%s;port=%s;charset=%s',
-                $host,
-                $name,
-                $port,
-                $charset),
-                $username,
-                $password
-            );
-        }else{
-            $this->pdo = new PDO(sprintf(
-                    'mysql:host=%s;dbname=%s;port=%s;charset=%s',
-                    settings['host'],
-                    settings['name'],
-                    settings['port'],
-                    settings['charset']
-                ),
-                settings['username'],
-                settings['password']
-            );
-        }
+
+        $this->pdo = new PDO(sprintf(
+            'mysql:host=%s;dbname=%s;port=%s;charset=%s',
+            $settings['host'],
+            $settings['name'],
+            $settings['port'],
+            $settings['charset']
+        ),
+            $settings['username'],
+            $settings['password']
+        );
     }
 
     function __destruct()
     {
-        $this->pdo = null;
-    }
+        //    $this->pdo = null;
 
-    // This is object by which all models do to connect to other database
-    function getPDO(){
+    }
+    // get database connection
+    public function getPDO()
+    {
         return $this->pdo;
     }
 
+    public function close(){
+        $this->pdo = null;
+    }
 
 
 }

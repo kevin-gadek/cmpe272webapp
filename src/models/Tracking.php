@@ -19,10 +19,9 @@ class Tracking
                     limit 5";
 
             $stmt = $pdo->prepare($sql);
+
             $stmt->execute();
-
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+            return $stmt->fetchAll();
         }catch (PDOException $e) {
 
             return null;
