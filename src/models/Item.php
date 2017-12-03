@@ -27,14 +27,17 @@ class Item
         $this->price = $price;
     }
 
-
-
     /**
      * @return mixed
      */
     public function getId()
     {
-        return $this->id;
+        if($this->id){
+            return $this->id;
+        }else{
+            $this->id = md5($this->title);
+            return $this->id;
+        }
     }
 
     /**
