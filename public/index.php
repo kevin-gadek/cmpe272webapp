@@ -198,7 +198,7 @@
 
                         echo "<div class=\"card-body\">";
                         echo "<h4 class=\"card-title\">";
-                        echo "<a href=\"../../public/item.php\">$title</a>";
+                        echo "<a href=\"../src/post/item.php?company_id=1&index=$i\">$title</a>";
                         echo "</h4>";
                         echo "<h5>$price</h5>";
                         echo "<p class=\"card-text\">$content</p>";

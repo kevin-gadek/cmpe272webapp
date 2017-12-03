@@ -35,13 +35,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/tracker.php">Tracking</a>
+              <a class="nav-link" href="../../public/tracker.php">Tracking</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/register.php">Register</a>
+              <a class="nav-link" href="../../public/register.php">Register</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link" href="/login">Log In</a>
+              <a class="nav-link" href="../../public/login.php">Log In</a>
             </li>
           </ul>
         </div>
@@ -120,7 +120,7 @@
               switch ($company_id){
                   case WebsiteConstants::$huy_company_id:
                       global $huy_items;
-                      appendItems($huy_items);
+                      appendItems($huy_items, $company_id);
                       break;
                   case WebsiteConstants::$andrew_company_id:
                       break;
@@ -133,7 +133,7 @@
               }
 
 
-              function appendItems($items)
+              function appendItems($items, $company_id)
               {
 
                   $length = count($items);
@@ -157,7 +157,7 @@
 
                       echo "<div class=\"card-body\">";
                       echo "<h4 class=\"card-title\">";
-                      echo "<a href=\"../../public/item.php\">$title</a>";
+                      echo "<a href=\"../../src/post/item.php?company_id=$company_id&index=$i\">$title</a>";
                       echo "</h4>";
                       echo "<h5>$price</h5>";
                       echo "<p class=\"card-text\">$content</p>";
