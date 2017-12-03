@@ -8,23 +8,14 @@
  * Time: 5:00 PM
  */
 
-/*
-include "../src/models/AnObject.php";
-
-$object = new AnObject("Hello", "hello");
-
-$object->echoImage("http://huyvanvo94.com/img/cs.jpg", 100, 100);*/
-
 include '../src/models/Tracking.php';
 include '../src/Database.php';
 include '../settings.php';
-
 
 $db = new Database($settings);
 $pdo = $db->getPDO();
 
 $results = Tracking::fetchTopFiveMostVisited($pdo);
-
 ?>
 
   <head>

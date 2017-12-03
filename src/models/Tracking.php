@@ -13,7 +13,7 @@ class Tracking
 
         try {
             $sql = "select product_id, count(_id) as instance
-                    from tracking
+                    from Tracking
                     group by product_id
                     order by instance desc
                     limit 5";
@@ -31,7 +31,7 @@ class Tracking
     static function fetchTopFiveMostVisitedInEachCompany($pdo, $company_id){
         try {
             $sql = "select product_id, count(_id) as instance
-                    from tracking
+                    from Tracking
                     where compmay_id = :company_id
                     group by product_id
                     order by instance desc
@@ -41,7 +41,7 @@ class Tracking
             $stmt->bindValue(':company_id',$company_id);
             $stmt->execute();
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll();
         }catch (PDOException $e) {
             return null;
         }
@@ -50,7 +50,7 @@ class Tracking
     static function fetchTopFiveBestReview($pdo){
         try {
             $sql = "select product_id,sum(review)/count(_id) as avg_review
-                    from tracking
+                    from Tracking
                     group by product_id
                     order by avg_review desc
                     limit 5";
@@ -58,7 +58,7 @@ class Tracking
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll();
         }catch (PDOException $e) {
             return null;
         }
@@ -67,7 +67,7 @@ class Tracking
     static function fetchTopFiveBestReviewInEachCompany($pdo, $company_id){
         try {
             $sql = "select product_id,sum(review)/count(_id) as avg_review
-                    from tracking
+                    from Tracking
                     where company_id = :company_id
                     group by product_id
                     order by avg_review desc
@@ -77,7 +77,7 @@ class Tracking
             $stmt->bindValue(':company_id',$company_id);
             $stmt->execute();
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll();
         }catch (PDOException $e) {
             return null;
         }

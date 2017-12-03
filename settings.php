@@ -7,8 +7,8 @@ $settings = [
     'host' => '127.0.0.1',
     'port' => '3306',
     'name' => 'test',
-    'username' => 'demo',
-    'password' => 'demo',
+    'username' => 'root',
+    'password' => 'root',
     'charset' => 'utf8'
 ];
 
