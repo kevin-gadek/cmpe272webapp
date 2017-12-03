@@ -22,7 +22,6 @@ CREATE TABLE Tracking(
 	review INT,
 	PRIMARY KEY (_id),
 	FOREIGN KEY (user_id) REFERENCES Users(_id)
-
 );
 
 
