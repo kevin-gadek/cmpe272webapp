@@ -1,6 +1,11 @@
 <?php
 include 'models/Item.php';
 
+function getHuyItemName($index){
+    global $huy_items;
+    return $huy_items[$index]->getTitle();
+}
+
 // Huy Products Here
 $huy_items = array(
     1 => new Item(
@@ -55,6 +60,7 @@ $huy_items = array(
         "../../public/company_imgs/company_1/sports.jpg",
         "$21 per hour")
 );
+
 
 
 
