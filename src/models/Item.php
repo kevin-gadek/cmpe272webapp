@@ -27,6 +27,11 @@ class Item
         $this->image_url = $image_url;
         $this->price = $price;
     }
+    // I dont see this application needing
+    // to get product name from product id
+
+
+
 
     /**
      * @return mixed
