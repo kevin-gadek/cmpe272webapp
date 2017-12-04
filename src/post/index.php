@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home
+              <a class="nav-link" href="../../public/index.php">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -58,11 +58,11 @@
           <h1 class="my-4">Spartan Shop</h1>
 		  <h3>Filter By: </h3>
           <div class="list-group">
-            <a href="#" class="list-group-item">Tutoring</a> <!-- Huy company id 1-->
-            <a href="#" class="list-group-item">Gemstones</a>  <!-- andrew company id 2-->
-            <a href="#" class="list-group-item">Interior Design</a> <!-- kevin company id 3-->
-			<a href="#" class="list-group-item">Chinese Food Restaurant</a>  <!-- xuan company id 4-->
-			<a href="#" class="list-group-item">Construction</a>  <!-- mangesh company id 5-->
+            <a href="index.php?company_id=1" class="list-group-item">Tutoring</a> <!-- Huy company id 1-->
+            <a href="index.php?company_id=2" class="list-group-item">Gemstones</a>  <!-- andrew company id 2-->
+            <a href="index.php?company_id=3" class="list-group-item">Interior Design</a> <!-- kevin company id 3-->
+			<a href="index.php?company_id=4" class="list-group-item">Chinese Food Restaurant</a>  <!-- xuan company id 4-->
+			<a href="index.php?company_id=5" class="list-group-item">Construction</a>  <!-- mangesh company id 5-->
           </div>
 
         </div>
@@ -117,16 +117,28 @@
 
               $company_id = $_GET['company_id'];
 
+
+			  
               switch ($company_id){
                   case WebsiteConstants::$huy_company_id:
                       global $huy_items;
                       appendItems($huy_items, $company_id);
                       break;
                   case WebsiteConstants::$andrew_company_id:
+					  global $andrew_items;
+                      appendItems($andrew_items, $company_id);
                       break;
                   case WebsiteConstants::$xuan_company_id:
+					  global $xuan_items;
+                      appendItems($xuan_items, $company_id);
                       break;
                   case WebsiteConstants::$kevin_company_id:
+					  global $kevin_items;
+                      appendItems($kevin_items, $company_id);
+                      break;
+				  case WebsiteConstants::$mangesh_company_id:
+					  global $mangesh_items;
+                      appendItems($mangesh_items, $company_id);
                       break;
                   default:
                       echo "Error";

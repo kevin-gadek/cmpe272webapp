@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,13 +95,23 @@
                     appendItem($huy_items[$index]);
                     break;
                 case WebsiteConstants::$andrew_company_id:
+					global $andrew_items;
+                    appendItem($andrew_items[$index]);
                     break;
                 case WebsiteConstants::$xuan_company_id:
+					global $xuan_items;
+                    appendItem($xuan_items[$index]);
                     break;
                 case WebsiteConstants::$kevin_company_id:
+					global $kevin_items;
+                    appendItem($kevin_items[$index]);
+                    break;
+				case WebsiteConstants::$mangesh_company_id:
+					global $mangesh_items;
+                    appendItem($mangesh_items[$index]);
                     break;
                 default:
-                    echo "Error";
+                    echo "oops... Something went wrong";
             }
 
 
