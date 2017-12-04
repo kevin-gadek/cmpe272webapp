@@ -96,12 +96,34 @@ class User
             $stmt->bindValue(':home_number', $this->homeNumber);
             $stmt->bindValue(':mobile_number', $this->mobileNumber);
             $stmt->execute();
-            return;
+            return true;
         }catch (PDOException $e) {
 
             return false;
         }
 
+    }
+    
+   function login($pdo){
+        try{
+            $sql = "SELECT * FROM Users WHERE email = :email AND password = :password";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':email', $this->email);
+            $stmt->bindValue(':password', $this->password);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            //print_r($result);
+            if(count($result) > 0){
+                //print_r($result[0]["_id"]);
+                $_SESSION["user_id"] = $result[0]["_id"];
+                //echo "Session variable is: " .  $_SESSION["user_id"];
+            }else{
+                echo "<p>Email and/or password doesn't match.</p>";
+            }
+            return true;
+        }catch(PDOException $e){
+            return false;
+        }
     }
 
     static function login($pdo, $email, $password){
@@ -128,7 +150,7 @@ class User
 
     static function register($pdo, $email, $password,$lastName,$firstName,$home_number,$mobile_number){
         try{
-            $sql = "insert into Users(email,password,lastName,firstNaem,home_number,mobile_number)
+            $sql = "insert into Users(email,password,lastName,firstName,home_number,mobile_number)
               values (:email,:password,:lastName,:firstName,:home_number,:mobile_number)";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':email', $email);
@@ -144,6 +166,30 @@ class User
             return false;
         }
     }
+    
+  function register($pdo){
+
+        try {
+            $sql = "INSERT INTO Users(firstName, lastName, email, password, home_number, mobile_number) 
+                    VALUES (:firstName, :lastName, :email, :password, :home_number, :mobile_number)";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':firstName', $this->firstName);
+            $stmt->bindValue(':lastName', $this->lastName);
+            $stmt->bindValue(':email', $this->email);
+            $stmt->bindValue(':password', $this->password);
+            $stmt->bindValue(':home_number', $this->homeNumber);
+            $stmt->bindValue(':mobile_number', $this->mobileNumber);
+            $stmt->execute();
+            return;
+        }catch (PDOException $e) {
+
+            return false;
+        }
+
+    }
+    
+    
     function signOut(){
 
         return false;
