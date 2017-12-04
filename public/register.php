@@ -20,7 +20,7 @@
 
   <body style="height:100%">
 
-    <!-- Navigation -->
+ <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,11 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-<<<<<<< HEAD
               <a class="nav-link" href="index.html">Home</a>
-=======
-              <a class="nav-link" href="index.php">Home</a>
->>>>>>> a02b6e8ccf316e0c0961d80ec84c9a5d1acef8b4
             </li>
             <li class="nav-item">
               <a class="nav-link" href="tracker.php">Tracking</a>
@@ -41,11 +37,11 @@
             <li class="nav-item">
               <a class="nav-link" href="register.php">Register</a>
             </li>
-			<li class="nav-item">
+      <li class="nav-item">
               <a class="nav-link" href="login.php">Log In
-				<span class="sr-only">(current)</span>
-			  </a>
-			  
+        <span class="sr-only">(current)</span>
+        </a>
+        
             </li>
           </ul>
         </div>

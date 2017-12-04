@@ -10,7 +10,8 @@ final class WebsiteConstants
 {
 
     static $huy_company_id = 1;
-
-
-
+    static $andrew_company_id = 2;
+    static $kevin_company_id = 3;
+    static $xuan_company_id = 4;
+    //TODO: Other guy
 }

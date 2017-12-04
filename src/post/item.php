@@ -55,27 +55,78 @@
         <div class="col-lg-3">
             <h1 class="my-4">Spartan Shop</h1>
             <div class="list-group">
-                <a href="#" class="list-group-item active">Company 1</a>
-                <a href="#" class="list-group-item">Company 2</a>
-                <a href="#" class="list-group-item">Company 3</a>
-                <a href="#" class="list-group-item">Company 4</a>
-                <a href="#" class="list-group-item">Company 5</a>
+
+                <a href="index.php?company_id=1" class="list-group-item">Tutoring</a> <!-- Huy company id 1-->
+                <a href="index.php?company_id=2" class="list-group-item">Gemstones</a>  <!-- andrew company id 2-->
+                <a href="index.php?company_id=3" class="list-group-item">Interior Design</a> <!-- kevin company id 3-->
+                <a href="index.php?company_id=4" class="list-group-item">Chinese Food Restaurant</a>  <!-- xuan company id 4-->
+                <a href="index.php?company_id=5" class="list-group-item">Construction</a>  <!-- mangesh company id 5-->
             </div>
         </div>
         <!-- /.col-lg-3 -->
 
         <div class="col-lg-9">
 
-            <div class="card mt-4">
-                <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
-                <div class="card-body">
-                    <h3 class="card-title">Product Name</h3>
-                    <h4>$24.99</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-                    <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                    4.0 stars
-                </div>
-            </div>
+            <!-- Dynamically display item -->
+            <?php
+
+            $index = $_GET['index'];
+            $company_id = $_GET['company_id'];
+
+
+
+            include '../hash_map_constants.php';
+            include '../WebsiteConstants.php';
+
+            include '../src/models/Tracking.php';
+            include '../src/Database.php';
+            include '../settings.php';
+
+            $db = new Database($settings);
+            $pdo = $db->getPDO();
+
+            Tracking::insertData($pdo,$company_id,$index,$_SESSION("user_id"));
+
+
+            switch ($company_id){
+                case WebsiteConstants::$huy_company_id:
+                    global $huy_items;
+                    appendItem($huy_items[$index]);
+                    break;
+                case WebsiteConstants::$andrew_company_id:
+                    break;
+                case WebsiteConstants::$xuan_company_id:
+                    break;
+                case WebsiteConstants::$kevin_company_id:
+                    break;
+                default:
+                    echo "Error";
+            }
+
+
+            function appendItem($item){
+
+                $src = $item->getImageUrl();
+                $content = $item->getDescription();
+                $price = $item->getPrice();
+                $title = $item->getTitle();
+
+
+                echo "<div class=\"card mt-4\">";
+                echo "<img class=\"card-img-top img-fluid\" src=$src alt=\"\">";
+                echo "<div class=\"card-body\">";
+                echo "<h3 class=\"card-title\">$title</h3>";
+                echo "<h4>$price</h4>";
+                echo "<p class=\"card-text\">$content</p>";
+                echo "<span class=\"text-warning\">&#9733; &#9733; &#9733; &#9733; &#9734;</span>";
+                echo "4.0 stars";
+                echo "</div>";
+                echo "</div>";
+            }
+
+            ?>
+
+
             <!-- /.card -->
 
             <div class="card card-outline-secondary my-4">

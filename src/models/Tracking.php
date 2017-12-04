@@ -17,9 +17,7 @@ class Tracking
                     group by product_id
                     order by instance desc
                     limit 5";
-
             $stmt = $pdo->prepare($sql);
-
             $stmt->execute();
             return $stmt->fetchAll();
         }catch (PDOException $e) {
@@ -40,7 +38,6 @@ class Tracking
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':company_id',$company_id);
             $stmt->execute();
-
             return $stmt->fetchAll();
         }catch (PDOException $e) {
             return null;
@@ -57,7 +54,6 @@ class Tracking
 
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
-
             return $stmt->fetchAll();
         }catch (PDOException $e) {
             return null;
@@ -76,8 +72,27 @@ class Tracking
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':company_id',$company_id);
             $stmt->execute();
-
             return $stmt->fetchAll();
+        }catch (PDOException $e) {
+            return null;
+        }
+    }
+    static function insertData($pdo,$company_id,$index, $user_id){
+        try {
+            echo $company_id." :".$index." ".$user_id;
+//            $timenow = time();
+            $sql = "INSERT INTO Tracking(user_id,product_id,company_id) 
+                    VALUES (?,?,?)";
+            $stmt = $pdo->prepare($sql);
+            /*
+            $stmt->bindValue(':user_id',$user_id);
+            $stmt->bindValue(':index',$index);
+            $stmt->bindValue(':company_id',$company_id);
+//            $stmt->bindValue(':timenow', $timenow);
+            */
+            $stmt->execute(array($user_id, $index, $company_id));
+
+            return ;
         }catch (PDOException $e) {
             return null;
         }
