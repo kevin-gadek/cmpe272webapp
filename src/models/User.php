@@ -126,6 +126,24 @@ class User
         }
     }
 
+    static function register($pdo, $email, $password,$lastName,$firstName,$home_number,$mobile_number){
+        try{
+            $sql = "insert into Users(email,password,lastName,firstNaem,home_number,mobile_number)
+              values (:email,:password,:lastName,:firstName,:home_number,:mobile_number)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':email', $email);
+            $stmt->bindValue(':password', $password);
+            $stmt->bindValue(':lastName', $lastName);
+            $stmt->bindValue(':firstName', $firstName);
+            $stmt->bindValue(':home_number', $home_number);
+            $stmt->bindValue(':mobile_number', $mobile_number);
+            $stmt->execute();
+
+            return;
+        }catch(PDOException $e){
+            return false;
+        }
+    }
     function signOut(){
 
         return false;
