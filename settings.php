@@ -4,11 +4,11 @@
 
 /* Change this for local/remote DB access */
 $settings = [
-    'host' => '127.0.0.1',
-    'port' => '3306',
-    'name' => 'test',
-    'username' => 'demo',
-    'password' => 'demo',
+    'host' => 'localhost',
+    'port' => '',
+    'name' => 'id3752086_tracking',
+    'username' => 'id3752086_admin',
+    'password' => 'password',
     'charset' => 'utf8'
 ];
 

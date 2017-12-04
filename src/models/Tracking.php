@@ -13,16 +13,13 @@ class Tracking
 
         try {
             $sql = "select product_id, count(_id) as instance
-                    from tracking
+                    from Tracking
                     group by product_id
                     order by instance desc
                     limit 5";
-
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
-
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+            return $stmt->fetchAll();
         }catch (PDOException $e) {
 
             return null;
@@ -32,7 +29,7 @@ class Tracking
     static function fetchTopFiveMostVisitedInEachCompany($pdo, $company_id){
         try {
             $sql = "select product_id, count(_id) as instance
-                    from tracking
+                    from Tracking
                     where compmay_id = :company_id
                     group by product_id
                     order by instance desc
@@ -41,8 +38,7 @@ class Tracking
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':company_id',$company_id);
             $stmt->execute();
-
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll();
         }catch (PDOException $e) {
             return null;
         }
@@ -51,15 +47,14 @@ class Tracking
     static function fetchTopFiveBestReview($pdo){
         try {
             $sql = "select product_id,sum(review)/count(_id) as avg_review
-                    from tracking
+                    from Tracking
                     group by product_id
                     order by avg_review desc
                     limit 5";
 
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
-
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll();
         }catch (PDOException $e) {
             return null;
         }
@@ -68,7 +63,7 @@ class Tracking
     static function fetchTopFiveBestReviewInEachCompany($pdo, $company_id){
         try {
             $sql = "select product_id,sum(review)/count(_id) as avg_review
-                    from tracking
+                    from Tracking
                     where company_id = :company_id
                     group by product_id
                     order by avg_review desc
@@ -77,19 +72,17 @@ class Tracking
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':company_id',$company_id);
             $stmt->execute();
-
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll();
         }catch (PDOException $e) {
             return null;
         }
     }
-    static function insertData($pdo,$company_id,$index,$user_id){
+    static function insertData($pdo,$company_id,$index, $user_id){
         try {
-           // echo $company_id." :".$index." :".$user_id;
+            echo $company_id." :".$index." ".$user_id;
 //            $timenow = time();
             $sql = "INSERT INTO Tracking(user_id,product_id,company_id) 
                     VALUES (?,?,?)";
-
             $stmt = $pdo->prepare($sql);
             /*
             $stmt->bindValue(':user_id',$user_id);

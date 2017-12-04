@@ -5,7 +5,6 @@
  * Date: 11/26/17
  * Time: 4:08 PM
  */
-namespace User;
 
 class User
 {
@@ -97,19 +96,41 @@ class User
             $stmt->bindValue(':home_number', $this->homeNumber);
             $stmt->bindValue(':mobile_number', $this->mobileNumber);
             $stmt->execute();
-            return;
+            return true;
         }catch (PDOException $e) {
 
             return false;
         }
 
     }
+    
+   function login($pdo){
+        try{
+            $sql = "SELECT * FROM Users WHERE email = :email AND password = :password";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':email', $this->email);
+            $stmt->bindValue(':password', $this->password);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            //print_r($result);
+            if(count($result) > 0){
+                //print_r($result[0]["_id"]);
+                $_SESSION["user_id"] = $result[0]["_id"];
+                //echo "Session variable is: " .  $_SESSION["user_id"];
+            }else{
+                echo "<p>Email and/or password doesn't match.</p>";
+            }
+            return true;
+        }catch(PDOException $e){
+            return false;
+        }
+    }
 
     static function login($pdo, $email, $password){
         try{
             $sql = "SELECT * FROM Users WHERE email = :email AND password = :password";
             $stmt = $pdo->prepare($sql);
-             $stmt->bindValue(':email', $email);
+            $stmt->bindValue(':email', $email);
             $stmt->bindValue(':password', $password);
             $stmt->execute();
             $result = $stmt->fetchAll();
@@ -139,12 +160,14 @@ class User
             $stmt->bindValue(':home_number', $home_number);
             $stmt->bindValue(':mobile_number', $mobile_number);
             $stmt->execute();
-            return;
+            return true;
+
         }catch(PDOException $e){
             return false;
         }
     }
     
+
     static function checkEmailExists($pdo, $email){
         try{
             $sql = "SELECT email FROM Users WHERE email = :email";
@@ -161,7 +184,8 @@ class User
             return $e;
         }
     }
-
+    
+    
     function signOut(){
 
         return false;

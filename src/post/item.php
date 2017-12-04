@@ -79,6 +79,14 @@
             include '../hash_map_constants.php';
             include '../WebsiteConstants.php';
 
+            include '../src/models/Tracking.php';
+            include '../src/Database.php';
+            include '../settings.php';
+
+            $db = new Database($settings);
+            $pdo = $db->getPDO();
+
+            Tracking::insertData($pdo,$company_id,$index,$_SESSION("user_id"));
 
 
             switch ($company_id){
