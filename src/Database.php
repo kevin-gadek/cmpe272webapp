@@ -5,27 +5,15 @@
  * Date: 11/26/17
  * Time: 4:11 PM
  */
-
-namespace Database;
-
+ 
 class Database
 {
     private $pdo;
 
 
-    function __construct($host=null, $name=null, $port=null, $charset=null, $username=null, $password=null, $settings=null)
+    function __construct($settings)
     {
-        if($settings == null) {
-            $this->pdo = new \PDO(sprintf(
-                'mysql:host=%s;dbname=%s;port=%s;charset=%s',
-                $host,
-                $name,
-                $port,
-                $charset),
-                $username,
-                $password
-            );
-        }else{
+      
             $this->pdo = new PDO(sprintf(
                     'mysql:host=%s;dbname=%s;port=%s;charset=%s',
                     settings['host'],
@@ -36,7 +24,7 @@ class Database
                 settings['username'],
                 settings['password']
             );
-        }
+      
     }
 
     function __destruct()
@@ -48,6 +36,8 @@ class Database
     function getPDO(){
         return $this->pdo;
     }
+    // be sure to close db 
+    function close(){ $this->pdo = null; }
 
 
 
