@@ -1,3 +1,13 @@
+<?php
+session_start();
+include '../src/Database.php';
+include '../settings.php';
+include '../src/models/User.php';
+
+$db = new Database($settings);
+$pdo = $db->getPDO();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,13 +63,31 @@
     <!-- Page Content -->
     <div class="login-page">
   <div class="form">
-    <form class="login-form">
+    <form class="login-form" method="post" action="login.php?process">
       <input type="text" placeholder="username"/>
       <input type="password" placeholder="password"/>
       <button>login</button>
     </form>
+    <?php
+        if(isset($_GET['process'])){
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            User::login($pdo, $email, $password);
+            if(isset($_SESSION["user_id"])){
+                //success
+                if (headers_sent()) {
+                     die("Success. <p><a href=/>Back to Home</a></p>");
+                }else{
+                    exit(header("Location: /"));
+                } 
+            }
+        }
+
+    ?>
   </div>
 </div>
+
+
     <!-- /.container -->
 
     <!-- Footer -->

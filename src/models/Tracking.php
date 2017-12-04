@@ -83,5 +83,26 @@ class Tracking
             return null;
         }
     }
+    static function insertData($pdo,$company_id,$index,$user_id){
+        try {
+           // echo $company_id." :".$index." :".$user_id;
+//            $timenow = time();
+            $sql = "INSERT INTO Tracking(user_id,product_id,company_id) 
+                    VALUES (?,?,?)";
+
+            $stmt = $pdo->prepare($sql);
+            /*
+            $stmt->bindValue(':user_id',$user_id);
+            $stmt->bindValue(':index',$index);
+            $stmt->bindValue(':company_id',$company_id);
+//            $stmt->bindValue(':timenow', $timenow);
+            */
+            $stmt->execute(array($user_id, $index, $company_id));
+
+            return ;
+        }catch (PDOException $e) {
+            return null;
+        }
+    }
 
 }

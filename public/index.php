@@ -1,4 +1,6 @@
-
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +31,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <?php
+                        $user = $_SESSION["user_id"];
+                        if(!$user){
+                            $user = "Guest";
+                        }
+                        echo "<h4>$user</h4>";
+                    ?>
+                </li>
+                <br>
                 <li class="nav-item active">
                     <a class="nav-link" href="index.php">Home
                         <span class="sr-only">(current)</span>
