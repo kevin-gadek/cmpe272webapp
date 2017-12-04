@@ -161,7 +161,7 @@ class User
             $stmt->bindValue(':mobile_number', $mobile_number);
             $stmt->execute();
 
-            return;
+            return true;
         }catch(PDOException $e){
             return false;
         }
@@ -181,7 +181,7 @@ class User
             $stmt->bindValue(':home_number', $this->homeNumber);
             $stmt->bindValue(':mobile_number', $this->mobileNumber);
             $stmt->execute();
-            return;
+            return true;
         }catch (PDOException $e) {
 
             return false;
