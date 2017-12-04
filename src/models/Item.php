@@ -19,8 +19,9 @@ class Item
 
     protected $price;
 
-    function __construct($title, $description, $image_url, $price)
+    function __construct($id, $title, $description, $image_url, $price)
     {
+        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->image_url = $image_url;
@@ -32,12 +33,8 @@ class Item
      */
     public function getId()
     {
-        if($this->id){
-            return $this->id;
-        }else{
-            $this->id = md5($this->title);
-            return $this->id;
-        }
+
+        return $this->id;
     }
 
     /**
