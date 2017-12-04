@@ -18,6 +18,7 @@ $object->echoImage("http://huyvanvo94.com/img/cs.jpg", 100, 100);*/
 include '../src/models/Tracking.php';
 include '../src/Database.php';
 include '../settings.php';
+include '../src/product_id_constants.php';
 
 
 $db = new Database($settings);
