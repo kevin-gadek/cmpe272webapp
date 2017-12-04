@@ -127,6 +127,41 @@ class User
         }
     }
 
+    static function register($pdo, $email, $password,$lastName,$firstName,$home_number,$mobile_number){
+        try{
+            $sql = "INSERT INTO Users(email,password,lastName,firstName,home_number,mobile_number)
+              values (:email,:password,:lastName,:firstName,:home_number,:mobile_number)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':email', $email);
+            $stmt->bindValue(':password', $password);
+            $stmt->bindValue(':lastName', $lastName);
+            $stmt->bindValue(':firstName', $firstName);
+            $stmt->bindValue(':home_number', $home_number);
+            $stmt->bindValue(':mobile_number', $mobile_number);
+            $stmt->execute();
+            return;
+        }catch(PDOException $e){
+            return false;
+        }
+    }
+    
+    static function checkEmailExists($pdo, $email){
+        try{
+            $sql = "SELECT email FROM Users WHERE email = :email";
+             $stmt = $pdo->prepare($sql);
+             $stmt->bindValue(':email', $email);
+             $stmt->execute();
+            $result = $stmt->fetchAll();
+            if(count($result) > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(PDOException $e){
+            return $e;
+        }
+    }
+
     function signOut(){
 
         return false;
