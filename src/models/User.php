@@ -150,7 +150,7 @@ class User
 
     static function register($pdo, $email, $password,$lastName,$firstName,$home_number,$mobile_number){
         try{
-            $sql = "insert into Users(email,password,lastName,firstName,home_number,mobile_number)
+            $sql = "INSERT INTO Users(email,password,lastName,firstName,home_number,mobile_number)
               values (:email,:password,:lastName,:firstName,:home_number,:mobile_number)";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':email', $email);
@@ -160,33 +160,29 @@ class User
             $stmt->bindValue(':home_number', $home_number);
             $stmt->bindValue(':mobile_number', $mobile_number);
             $stmt->execute();
-
             return true;
+
         }catch(PDOException $e){
             return false;
         }
     }
     
-  function register($pdo){
 
-        try {
-            $sql = "INSERT INTO Users(firstName, lastName, email, password, home_number, mobile_number) 
-                    VALUES (:firstName, :lastName, :email, :password, :home_number, :mobile_number)";
-
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(':firstName', $this->firstName);
-            $stmt->bindValue(':lastName', $this->lastName);
-            $stmt->bindValue(':email', $this->email);
-            $stmt->bindValue(':password', $this->password);
-            $stmt->bindValue(':home_number', $this->homeNumber);
-            $stmt->bindValue(':mobile_number', $this->mobileNumber);
-            $stmt->execute();
-            return true;
-        }catch (PDOException $e) {
-
-            return false;
+    static function checkEmailExists($pdo, $email){
+        try{
+            $sql = "SELECT email FROM Users WHERE email = :email";
+             $stmt = $pdo->prepare($sql);
+             $stmt->bindValue(':email', $email);
+             $stmt->execute();
+            $result = $stmt->fetchAll();
+            if(count($result) > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(PDOException $e){
+            return $e;
         }
-
     }
     
     
