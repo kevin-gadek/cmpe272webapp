@@ -12,11 +12,10 @@ class Tracking
     static function fetchTopFiveMostVisited($pdo){
 
         try {
-            $sql = "select product_real_id , count(_id) as instance 
-                    from (
-                    select _id,product_id+company_id*10 as product_real_id 
-                    from Tracking 
-                    ) as innerTable
+            $sql = "select product_real_id , count(_id) as instance from (
+                    select _id,concat(cast(company_id as CHARACTER(30)) ,
+                     cast(product_id as CHARACTER(30))) as product_real_id 
+                    from Tracking) as innerTable
                     group by product_real_id
                     order by instance desc
                     limit 5";
@@ -31,12 +30,11 @@ class Tracking
 
     static function fetchTopFiveMostVisitedInEachCompany($pdo, $company_id){
         try {
-            $sql = "select product_real_id , count(_id) as instance 
-                    from (
-                    select _id,product_id+company_id*10 as product_real_id 
+            $sql = "select product_real_id , count(_id) as instance from (
+                    select _id,concat(cast(company_id as CHARACTER(30)) ,
+                     cast(product_id as CHARACTER(30))) as product_real_id 
                     from Tracking 
-                    where company_id = :company_id
-                    ) as innerTable
+                    where company_id = :company_id ) as innerTable
                     group by product_real_id
                     order by instance desc
                     limit 5";
@@ -54,7 +52,8 @@ class Tracking
         try {
             $sql = "select product_real_id , sum(review)/count(_id) as avg_review 
                     from (
-                    select _id,review,product_id+company_id*10 as product_real_id 
+                    select _id,review,concat(cast(company_id as CHARACTER(30)) ,
+                     cast(product_id as CHARACTER(30))) as product_real_id 
                     from Tracking 
                     ) as innerTable
                     group by product_real_id
@@ -73,10 +72,10 @@ class Tracking
         try {
             $sql = "select product_real_id , sum(review)/count(_id) as avg_review 
                     from (
-                    select _id,review,product_id+company_id*10 as product_real_id 
+                    select _id,review,concat(cast(company_id as CHARACTER(30)) ,
+                     cast(product_id as CHARACTER(30))) as product_real_id 
                     from Tracking 
-                    where company_id = :company_id
-                    ) as innerTable
+                    where company_id = :company_id ) as innerTable
                     group by product_real_id
                     order by avg_review desc
                     limit 5";

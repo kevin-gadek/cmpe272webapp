@@ -84,9 +84,9 @@ $results = Tracking::fetchTopFiveMostVisited($pdo);
         <!-- top five list here -->
         <ul>
             <?php
-            echo count($results);
+//            echo count($results);
             foreach ($results as $result){
-                echo "<li>" . $result['product_id']."  ".$result['instance']."</li>";
+                echo "<li>" . $result['product_real_id']."  ".$result['instance']."</li>";
             }
             ?>
         </ul>
