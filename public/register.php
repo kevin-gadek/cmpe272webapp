@@ -37,6 +37,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+		  <li class="nav-item">
+                    <?php
+                    $user = null;
+                    if(isset($_SESSION["user_name"])){
+                        $user = $_SESSION["user_name"];
+                         echo "<h5 class='nav-link'>Welcome, $user</h5>";
+                    }else if(isset($_SESSION["FBID"])){
+						$user = $_SESSION["FULLNAME"];
+						echo "<h5 class='nav-link'>Welcome, $user</h5>";
+					}
+                     
+                        
+                    ?>
+                </li>
+                <br>
             <li class="nav-item">
               <a class="nav-link" href="/">Home</a>
             </li>
@@ -47,19 +62,28 @@
               <a class="nav-link" href="/public/register.php">Register
               <span class="sr-only">(current)</span></a>
             </li>
-      <li class="nav-item">
-              <a class="nav-link" href="/public/login.php">Log In
-        
-        </a>
-        
-            </li>
+			 <?php
+                if(isset($_SESSION['user_id']) || isset($_SESSION['FBID'])){
+					echo "<li class='nav-item'>
+                 <a class='nav-link' href='/public/history.php'>Your History</a>
+                    </li> ";
+                    echo "<li class='nav-item'>
+                 <a class='nav-link' href='/public/index.php?logout'>Log Out</a>
+                    </li> ";
+                }
+				else	{
+                echo "<li class='nav-item active'>
+                 <a class='nav-link' href='/public/login.php'>Log In</a>
+                    </li> ";
+				}
+            ?>
           </ul>
         </div>
       </div>
     </nav>
 
     <!-- Page Content -->
-    <div class="registration-page">
+			    <div class="registration-page">
   <div class="form">
     <form class="register-form" action="register.php?process" method = "POST" >
         <input type="text" placeholder="Email" name="email"/>
@@ -103,12 +127,12 @@
     <!-- /.container -->
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark" style="position:absolute; bottom:0; width:100%">
+<!--    <footer class="py-5 bg-dark" style="position:absolute; bottom:0; width:100%">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Spartan Shop 2017</p>
       </div>
       <!-- /.container -->
-    </footer>
+   <!-- </footer> -->
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>

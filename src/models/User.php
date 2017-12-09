@@ -96,7 +96,7 @@ class User
             $stmt->bindValue(':home_number', $this->homeNumber);
             $stmt->bindValue(':mobile_number', $this->mobileNumber);
             $stmt->execute();
-            return true;
+            return;
         }catch (PDOException $e) {
 
             return false;
@@ -104,29 +104,30 @@ class User
 
     }
     
-   function login($pdo){
+
+    static function login($pdo, $email, $password){
         try{
             $sql = "SELECT * FROM Users WHERE email = :email AND password = :password";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(':email', $this->email);
-            $stmt->bindValue(':password', $this->password);
+             $stmt->bindValue(':email', $email);
+            $stmt->bindValue(':password', $password);
             $stmt->execute();
             $result = $stmt->fetchAll();
             //print_r($result);
             if(count($result) > 0){
                 //print_r($result[0]["_id"]);
                 $_SESSION["user_id"] = $result[0]["_id"];
+                $_SESSION["user_name"] = $result[0]["firstName"];
                 //echo "Session variable is: " .  $_SESSION["user_id"];
             }else{
-                echo "<p>Email and/or password doesn't match.</p>";
+                echo "<p>Email and/or password is incorrect.</p>";
             }
-            return true;
+            return;
         }catch(PDOException $e){
             return false;
         }
     }
-
-
+    
     static function register($pdo, $email, $password,$lastName,$firstName,$home_number,$mobile_number){
         try{
             $sql = "INSERT INTO Users(email,password,lastName,firstName,home_number,mobile_number)
@@ -139,14 +140,42 @@ class User
             $stmt->bindValue(':home_number', $home_number);
             $stmt->bindValue(':mobile_number', $mobile_number);
             $stmt->execute();
-            return true;
-
+            return;
         }catch(PDOException $e){
             return false;
         }
     }
+	
+	static function history($pdo, $user_id){
+		try{
+			$sql = "
+			select *
+                    from (
+                    select date_created,concat(cast(company_id as CHARACTER(30)) ,
+                     cast(product_id as CHARACTER(30))) as product_real_id 
+                    from Tracking 
+                    where user_id = :user_id and date_created is not null
+                    ) as innerTable
+					group by product_real_id
+                    order by date_created desc
+					";
+					
+			$stmt = $pdo->prepare($sql);
+			$stmt->bindValue(":user_id", $user_id);
+			$stmt->execute();
+			return $stmt->fetchAll();
+			
+			//$sql = "SELECT * from Tracking where user_id = 2 and date_created is not null group by product_id order by date_created desc"
+			
+		}catch(PDOException $e){
+			return false;
+			
+		}
+		
+		
+	}
+	
     
-
     static function checkEmailExists($pdo, $email){
         try{
             $sql = "SELECT email FROM Users WHERE email = :email";
@@ -163,8 +192,9 @@ class User
             return $e;
         }
     }
-    
-    
+	
+	
+
     function signOut(){
 
         return false;

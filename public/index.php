@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if(isset($_GET["logout"])){
+        session_destroy();
+        header("Location: /");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +21,7 @@
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="/public/css/shop-homepage.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -33,28 +37,46 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <?php
-                        $user = $_SESSION["user_id"];
-                        if(!$user){
-                            $user = "Guest";
-                        }
-                        echo "<h4>$user</h4>";
+                    $user = null;
+                    if(isset($_SESSION["user_name"])){
+                        $user = $_SESSION["user_name"];
+                         echo "<h5 class='nav-link'>Welcome, $user</h5>";
+                    }else if(isset($_SESSION["FBID"])){
+						$user = $_SESSION["FULLNAME"];
+						echo "<h5 class='nav-link'>Welcome, $user</h5>";
+					}
+                     
+                        
                     ?>
                 </li>
                 <br>
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home
+                    <a class="nav-link" href="/">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="tracker.php">Tracking</a>
+                    <a class="nav-link" href="/public/tracker.php">Tracking</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="register.php">Register</a>
+                    <a class="nav-link" href="/public/register.php">Register</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login">Log In</a>
-                </li>
+
+                 <?php
+                if(isset($_SESSION['user_id']) || isset($_SESSION['FBID'])){
+					echo "<li class='nav-item'>
+                 <a class='nav-link' href='/public/history.php'>Your History</a>
+                    </li> ";
+                    echo "<li class='nav-item'>
+                 <a class='nav-link' href='/public/index.php?logout'>Log Out</a>
+                    </li> ";
+                }
+				else	{
+                echo "<li class='nav-item'>
+                 <a class='nav-link' href='/public/login.php'>Log In</a>
+                    </li> ";
+				}
+            ?>
             </ul>
         </div>
     </div>
@@ -71,11 +93,11 @@
             <h3>Filter By: </h3>
             <div class="list-group">
 
-                <a href="../src/post/index.php?company_id=1" class="list-group-item">Tutoring</a> <!-- Huy company id 1-->
-                <a href="../src/post/index.php?company_id=2" class="list-group-item">Gemstones</a>  <!-- andrew company id 2-->
-                <a href="../src/post/index.php?company_id=3" class="list-group-item">Interior Design</a> <!-- kevin company id 3-->
-                <a href="../src/post/index.php?company_id=4" class="list-group-item">Chinese Food Restaurant</a>  <!-- xuan company id 4-->
-                <a href="../src/post/index.php?company_id=5" class="list-group-item">Construction</a>  <!-- mangesh company id 5-->
+                <a href="../src/index.php?company_id=1" class="list-group-item">Tutoring</a> <!-- Huy company id 1-->
+                <a href="../src/index.php?company_id=2" class="list-group-item">Gemstones</a>  <!-- andrew company id 2-->
+                <a href="../src/index.php?company_id=3" class="list-group-item">Interior Design</a> <!-- kevin company id 3-->
+                <a href="../src/index.php?company_id=4" class="list-group-item">Chinese Food Restaurant</a>  <!-- xuan company id 4-->
+                <a href="../src/index.php?company_id=5" class="list-group-item">Construction</a>  <!-- mangesh company id 5-->
             </div>
         </div>
         <!-- /.col-lg-3 -->
@@ -91,19 +113,19 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Company 1">
+                        <img class="d-block img-fluid" src="/public/carousel_img/tutoring.jpg" alt="Company 1">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Company 2">
+                        <img class="d-block img-fluid" src="/public/carousel_img/interior_design.jpeg" alt="Company 2">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Company 3">
+                        <img class="d-block img-fluid" src="/public/carousel_img/chinese_food.jpg" alt="Company 3">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Company 4">
+                        <img class="d-block img-fluid" src="/public/carousel_img/gemstones.jpg" alt="Company 4">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Company 5">
+                        <img class="d-block img-fluid" src="/public/carousel_img/construction.jpg" alt="Company 5">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -125,66 +147,14 @@
                 <?php
 
 
-                include '../src/models/Item.php';
-
-                // Huy Products Here
-
-                $huy_items = array(
-                    1 => new Item(
-                        "Art",
-                        file_get_contents("company_product_description/company_1/art.txt"),
-                        "company_imgs/company_1/art.jpg",
-                        "$21 per hour"),
-
-                    2 => new Item(
-                        "Cooking",
-                        file_get_contents("company_product_description/company_1/cooking.txt"),
-                        "company_imgs/company_1/cooking.jpg",
-                        "$21 per hour"),
-                    3 => new Item(
-                        "Computer Science",
-                        file_get_contents("company_product_description/company_1/cs.txt"),
-                        "company_imgs/company_1/cs.jpg",
-                        "$21 per hour"),
-                    4 => new Item(
-                        "Engineering",
-                        file_get_contents("company_product_description/company_1/engineering.txt"),
-                        "company_imgs/company_1/engineering.jpg",
-                        "$21 per hour"),
-                    5 => new Item(
-                        "English",
-                        file_get_contents("company_product_description/company_1/english.txt"),
-                        "company_imgs/company_1/english.jpeg",
-                        "$21 per hour"),
-                    6 => new Item(
-                        "Foreign Language",
-                        file_get_contents("company_product_description/company_1/fl.txt"),
-                        "company_imgs/company_1/fl.jpeg",
-                        "$21 per hour"),
-                    7 => new Item(
-                        "Mathematics",
-                        file_get_contents("company_product_description/company_1/math.txt"),
-                        "company_imgs/company_1/math.jpeg",
-                        "$21 per hour"),
-                    8 => new Item(
-                        "Music",
-                        file_get_contents( "company_product_description/company_1/music.txt"),
-                        "company_imgs/company_1/music.jpeg",
-                        "$21 per hour"),
-                    9 => new Item(
-                        "Science",
-                        file_get_contents("company_product_description/company_1/science.txt"),
-                        "company_imgs/company_1/science.jpg",
-                        "$21 per hour"),
-                    10 => new Item(
-                        "Sports",
-                        file_get_contents("company_product_description/company_1/sports.txt"),
-                        "company_imgs/company_1/sports.jpg",
-                        "$21 per hour")
-                );
-
+                //include '../src/models/Item.php';
+                include '../src/hash_map_constants.php';
 
                 appendItems($huy_items);
+                appendItems($andrew_items);
+                appendItems($kevin_items);
+                appendItems($mangesh_items);
+                appendItems($xuan_items);
 
                 function appendItems($items)
                 {
@@ -199,7 +169,9 @@
 
 
                         $item = $items[$i];
-
+                        $id = $item->getId();
+                        $company_id = substr($id, 0, 1);
+                        
                         $src = $item->getImageUrl();
                         $content = $item->getDescription();
                         $price = $item->getPrice();
@@ -210,7 +182,7 @@
 
                         echo "<div class=\"card-body\">";
                         echo "<h4 class=\"card-title\">";
-                        echo "<a href=\"../src/post/item.php?company_id=1&index=$i\">$title</a>";
+                        echo "<a href=\"../src/item.php?company_id=$company_id&index=$i\">$title</a>";
                         echo "</h4>";
                         echo "<h5>$price</h5>";
                         echo "<p class=\"card-text\">$content</p>";
