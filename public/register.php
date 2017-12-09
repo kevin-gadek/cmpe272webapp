@@ -25,6 +25,11 @@
     <!-- Custom styles for this template -->
     <link href="/public/css/shop-register.css" rel="stylesheet">
 
+	     <script>
+        var app = angular.module('formApp', []);
+        app.controller('validateCtrl', function($scope) {
+        });
+    </script>
   </head>
 
   <body style="height:100%">
