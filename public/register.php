@@ -90,7 +90,7 @@
     <!-- Page Content -->
 			    <div class="registration-page">
   <div class="form">
-    <form class="register-form" action="register.php?process" method = "POST" >
+    <form name="formApp" ng-app="formApp" ng-controller="validateCtrl" class="register-form" action="register.php?process" method = "POST" >
         <input type="text" placeholder="Email" name="email"/>
       <input type="text" placeholder="First Name" name= "firstName"/>
       <input type="text" placeholder="Last Name" name="lastName"/>
